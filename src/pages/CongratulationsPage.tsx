@@ -9,8 +9,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import {
+  useGetCelebrationsHook,
+  useGetStylesHook,
+  useGetTonesHook,
+} from '../hooks';
 
 export function CongratulationsPage() {
+  const styles = useGetStylesHook();
+  const celebrations = useGetCelebrationsHook();
+  const tones = useGetTonesHook();
+
   const handleGenerateClick = () => {
     console.log('generate');
   };

@@ -3,7 +3,7 @@ import { api } from '../axios';
 import { useStore } from '../store';
 import { Option } from '../types';
 
-export function useGetTonesHook() {
+export function useGetTones() {
   const setTones = useStore((state) => state.setTones);
   const tones = useStore((state) => state.tones);
 

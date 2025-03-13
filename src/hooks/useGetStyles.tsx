@@ -3,7 +3,7 @@ import { api } from '../axios';
 import { useStore } from '../store';
 import { Option } from '../types';
 
-export function useGetStylesHook() {
+export function useGetStyles() {
   const setStyles = useStore((state) => state.setStyles);
   const styles = useStore((state) => state.styles);
 

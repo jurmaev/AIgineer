@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  aigineer-front:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:80

@@ -3,7 +3,7 @@ import { api } from '../axios';
 import { useStore } from '../store';
 import { Option } from '../types';
 
-export function useGetCelebrationsHook() {
+export function useGetCelebrations() {
   const setCelebrations = useStore((state) => state.setCelebrations);
   const celebrations = useStore((state) => state.celebrations);
 

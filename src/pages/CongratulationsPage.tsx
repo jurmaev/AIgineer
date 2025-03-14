@@ -16,8 +16,7 @@ import {
   useGetTones,
   usePostPrompt,
 } from '../hooks';
-import { useForm } from 'react-hook-form';
-import { useStore } from '../store';
+import { useForm, Controller } from 'react-hook-form';
 
 type CongratulationForm = {
   styleId: string;
@@ -28,18 +27,15 @@ type CongratulationForm = {
 };
 
 export function CongratulationsPage() {
-  const { register, handleSubmit } = useForm<CongratulationForm>();
-
   const styles = useGetStyles();
   const celebrations = useGetCelebrations();
   const tones = useGetTones();
   const postPrompt = usePostPrompt();
 
-  const content = useStore((store) => store.content);
-
-  console.log(content, styles, celebrations, tones);
+  const { handleSubmit, control } = useForm<CongratulationForm>();
 
   const onSubmit = (data: CongratulationForm) => {
+    console.log(data);
     const postPromptBody = {
       mainContent: data.content,
       celebrationId: data.celebrationId,
@@ -58,35 +54,86 @@ export function CongratulationsPage() {
           <Box component='form' onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={1}>
               <Typography>Сгенерируйте поздравление</Typography>
-              <FormControl size='small'>
-                <Typography>Повод</Typography>
-                <Select id='celebrationType' {...register('celebrationId')}>
-                  <MenuItem value={1}>День рождения</MenuItem>
-                  <MenuItem value={2}>Новый год</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl size='small'>
-                <Typography>Тон</Typography>
-                <Select id='toneType' {...register('toneId')}>
-                  <MenuItem value={1}>Теплое</MenuItem>
-                  <MenuItem value={2}>Веселое</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl size='small'>
-                <Typography>Стиль</Typography>
-                <Select id='styleType' {...register('styleId')}>
-                  <MenuItem value={1}>Короткое</MenuItem>
-                  <MenuItem value={2}>Лаконичное</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl size='small'>
-                <Typography>Имя получателя</Typography>
-                <TextField size='small' {...register('name')} />
-              </FormControl>
-              <FormControl size='small'>
-                <Typography>Дополнительные пожелания</Typography>
-                <TextField multiline size='small' {...register('content')} />
-              </FormControl>
+
+              <Controller
+                name='celebrationId'
+                control={control}
+                defaultValue={celebrations.length ? celebrations[0].id : ''}
+                render={({ field }) => (
+                  <FormControl size='small'>
+                    <Typography>Повод</Typography>
+
+                    <Select id='celebrationType' {...field}>
+                      {celebrations.map((celebration) => (
+                        <MenuItem value={celebration.id} key={celebration.id}>
+                          {celebration.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              />
+
+              <Controller
+                name='toneId'
+                control={control}
+                defaultValue={tones.length ? tones[0].id : ''}
+                render={({ field }) => (
+                  <FormControl size='small'>
+                    <Typography>Тон</Typography>
+                    <Select id='toneType' {...field}>
+                      {tones.map((tone) => (
+                        <MenuItem value={tone.id} key={tone.id}>
+                          {tone.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              />
+
+              <Controller
+                name='styleId'
+                control={control}
+                defaultValue={tones.length ? tones[0].id : ''}
+                render={({ field }) => (
+                  <FormControl size='small'>
+                    <Typography>Стиль</Typography>
+                    <Select id='styleType' {...field}>
+                      {styles.map((style) => (
+                        <MenuItem value={style.id} key={style.id}>
+                          {style.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              />
+
+              <Controller
+                name='name'
+                control={control}
+                defaultValue=''
+                render={({ field }) => (
+                  <FormControl size='small'>
+                    <Typography>Имя</Typography>
+                    <TextField multiline size='small' {...field} />
+                  </FormControl>
+                )}
+              />
+
+              <Controller
+                name='content'
+                control={control}
+                defaultValue=''
+                render={({ field }) => (
+                  <FormControl size='small'>
+                    <Typography>Дополнительные пожелания</Typography>
+                    <TextField multiline size='small' {...field} />
+                  </FormControl>
+                )}
+              />
+
               <Button type='submit'>Сгенерировать!</Button>
             </Stack>
           </Box>

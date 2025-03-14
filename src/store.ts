@@ -20,18 +20,19 @@ export interface State {
 
 export const useStore = create<State>()((set) => ({
   styles: [],
-  setStyles: (newStyles) => set(() => ({ styles: newStyles })),
+  setStyles: (newStyles) => set((state) => ({ ...state, styles: newStyles })),
 
   tones: [],
-  setTones: (newTones) => set(() => ({ styles: newTones })),
+  setTones: (newTones) => set((state) => ({ ...state, tones: newTones })),
 
   celebrations: [],
   setCelebrations: (newCelebrations) =>
-    set(() => ({ styles: newCelebrations })),
+    set((state) => ({ ...state, celebrations: newCelebrations })),
 
   content: '',
-  setContent: (newContent) => set(() => ({ content: newContent })),
+  setContent: (newContent) =>
+    set((state) => ({ ...state, content: newContent })),
 
   isLoading: false,
-  setIsLoading: (value) => set(() => ({ isLoading: value })),
+  setIsLoading: (value) => set((state) => ({ ...state, isLoading: value })),
 }));

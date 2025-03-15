@@ -50,8 +50,35 @@ export function CongratulationsPage() {
   return (
     <>
       <Container>
-        <Paper sx={{ padding: 2 }}>
-          <Box component='form' onSubmit={handleSubmit(onSubmit)}>
+        <Typography
+          variant='h2'
+          fontSize='36px'
+          fontWeight='700'
+          marginBottom='24px'
+          lineHeight='1'
+          sx={{
+            background: 'linear-gradient(45deg, #457FDD, #49505B)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+          }}
+        >
+          Идеальное поздравление за пару кликов
+        </Typography>
+
+        <Typography
+          variant='body1'
+          color='#64748B'
+          marginBottom='24px'
+          maxWidth='680px'
+        >
+          Просто укажите параметры, такие как тип события, стиль и тон текста, и
+          получите готовое поздравление, которое порадует ваших близких, друзей
+          или коллег
+        </Typography>
+
+        <Box display='flex' alignItems='center' gap='24px'>
+          <Box width='100%' component='form' onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={1}>
               <Typography>Сгенерируйте поздравление</Typography>
 
@@ -137,7 +164,17 @@ export function CongratulationsPage() {
               <Button type='submit'>Сгенерировать!</Button>
             </Stack>
           </Box>
-        </Paper>
+
+          <Box width='100%'>
+            <Typography variant='subtitle1'>Сгенерированный текст</Typography>
+            <Typography variant='body1'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+              minima facere corporis et magnam iure possimus necessitatibus
+              unde. Aliquam consequatur voluptates laudantium explicabo aut vel
+              a veritatis, alias aliquid suscipit.
+            </Typography>
+          </Box>
+        </Box>
       </Container>
     </>
   );

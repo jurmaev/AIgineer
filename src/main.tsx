@@ -11,6 +11,7 @@ import { MainPage } from './pages/MainPage.tsx';
 import { CongratulationsPage } from './pages/CongratulationsPage.tsx';
 import { Header } from './components/Header.tsx';
 import { theme } from './theme.ts';
+import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

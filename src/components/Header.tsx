@@ -2,7 +2,7 @@ import { AppBar, Box, Container, Typography } from '@mui/material';
 
 export const Header = () => {
   return (
-    <AppBar position='static'>
+    <AppBar>
       <Container>
         <Box
           display='flex'

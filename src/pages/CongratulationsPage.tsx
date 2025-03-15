@@ -4,7 +4,6 @@ import {
   Container,
   FormControl,
   MenuItem,
-  Paper,
   Select,
   Stack,
   TextField,
@@ -50,129 +49,135 @@ export function CongratulationsPage() {
   return (
     <>
       <Container>
-        <Typography
-          variant='h2'
-          fontSize='36px'
-          fontWeight='700'
-          marginBottom='24px'
-          lineHeight='1'
-          sx={{
-            background: 'linear-gradient(45deg, #457FDD, #49505B)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-          }}
-        >
-          Идеальное поздравление за пару кликов
-        </Typography>
+        <Box paddingY={3}>
+          <Typography
+            variant='h2'
+            fontSize='36px'
+            fontWeight='700'
+            marginBottom='24px'
+            lineHeight='1'
+            sx={{
+              background: 'linear-gradient(45deg, #457FDD, #49505B)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            Идеальное поздравление за пару кликов
+          </Typography>
 
-        <Typography
-          variant='body1'
-          color='#64748B'
-          marginBottom='24px'
-          maxWidth='680px'
-        >
-          Просто укажите параметры, такие как тип события, стиль и тон текста, и
-          получите готовое поздравление, которое порадует ваших близких, друзей
-          или коллег
-        </Typography>
+          <Typography
+            variant='body1'
+            color='#64748B'
+            marginBottom='24px'
+            maxWidth='680px'
+          >
+            Просто укажите параметры, такие как тип события, стиль и тон текста,
+            и получите готовое поздравление, которое порадует ваших близких,
+            друзей или коллег
+          </Typography>
 
-        <Box display='flex' alignItems='center' gap='24px'>
-          <Box width='100%' component='form' onSubmit={handleSubmit(onSubmit)}>
-            <Stack gap={1}>
-              <Typography>Сгенерируйте поздравление</Typography>
+          <Box display='flex' alignItems='center' gap='24px'>
+            <Box
+              width='100%'
+              component='form'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <Stack gap={1}>
+                <Typography>Сгенерируйте поздравление</Typography>
 
-              <Controller
-                name='celebrationId'
-                control={control}
-                defaultValue={celebrations.length ? celebrations[0].id : ''}
-                render={({ field }) => (
-                  <FormControl size='small'>
-                    <Typography>Повод</Typography>
+                <Controller
+                  name='celebrationId'
+                  control={control}
+                  defaultValue={celebrations.length ? celebrations[0].id : ''}
+                  render={({ field }) => (
+                    <FormControl size='small'>
+                      <Typography>Повод</Typography>
 
-                    <Select id='celebrationType' {...field}>
-                      {celebrations.map((celebration) => (
-                        <MenuItem value={celebration.id} key={celebration.id}>
-                          {celebration.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                )}
-              />
+                      <Select id='celebrationType' {...field}>
+                        {celebrations.map((celebration) => (
+                          <MenuItem value={celebration.id} key={celebration.id}>
+                            {celebration.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
 
-              <Controller
-                name='toneId'
-                control={control}
-                defaultValue={tones.length ? tones[0].id : ''}
-                render={({ field }) => (
-                  <FormControl size='small'>
-                    <Typography>Тон</Typography>
-                    <Select id='toneType' {...field}>
-                      {tones.map((tone) => (
-                        <MenuItem value={tone.id} key={tone.id}>
-                          {tone.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                )}
-              />
+                <Controller
+                  name='toneId'
+                  control={control}
+                  defaultValue={tones.length ? tones[0].id : ''}
+                  render={({ field }) => (
+                    <FormControl size='small'>
+                      <Typography>Тон</Typography>
+                      <Select id='toneType' {...field}>
+                        {tones.map((tone) => (
+                          <MenuItem value={tone.id} key={tone.id}>
+                            {tone.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
 
-              <Controller
-                name='styleId'
-                control={control}
-                defaultValue={tones.length ? tones[0].id : ''}
-                render={({ field }) => (
-                  <FormControl size='small'>
-                    <Typography>Стиль</Typography>
-                    <Select id='styleType' {...field}>
-                      {styles.map((style) => (
-                        <MenuItem value={style.id} key={style.id}>
-                          {style.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                )}
-              />
+                <Controller
+                  name='styleId'
+                  control={control}
+                  defaultValue={tones.length ? tones[0].id : ''}
+                  render={({ field }) => (
+                    <FormControl size='small'>
+                      <Typography>Стиль</Typography>
+                      <Select id='styleType' {...field}>
+                        {styles.map((style) => (
+                          <MenuItem value={style.id} key={style.id}>
+                            {style.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
 
-              <Controller
-                name='name'
-                control={control}
-                defaultValue=''
-                render={({ field }) => (
-                  <FormControl size='small'>
-                    <Typography>Имя</Typography>
-                    <TextField multiline size='small' {...field} />
-                  </FormControl>
-                )}
-              />
+                <Controller
+                  name='name'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => (
+                    <FormControl size='small'>
+                      <Typography>Имя</Typography>
+                      <TextField multiline size='small' {...field} />
+                    </FormControl>
+                  )}
+                />
 
-              <Controller
-                name='content'
-                control={control}
-                defaultValue=''
-                render={({ field }) => (
-                  <FormControl size='small'>
-                    <Typography>Дополнительные пожелания</Typography>
-                    <TextField multiline size='small' {...field} />
-                  </FormControl>
-                )}
-              />
+                <Controller
+                  name='content'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => (
+                    <FormControl size='small'>
+                      <Typography>Дополнительные пожелания</Typography>
+                      <TextField multiline size='small' {...field} />
+                    </FormControl>
+                  )}
+                />
 
-              <Button type='submit'>Сгенерировать!</Button>
-            </Stack>
-          </Box>
+                <Button type='submit'>Сгенерировать!</Button>
+              </Stack>
+            </Box>
 
-          <Box width='100%'>
-            <Typography variant='subtitle1'>Сгенерированный текст</Typography>
-            <Typography variant='body1'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-              minima facere corporis et magnam iure possimus necessitatibus
-              unde. Aliquam consequatur voluptates laudantium explicabo aut vel
-              a veritatis, alias aliquid suscipit.
-            </Typography>
+            <Box width='100%'>
+              <Typography variant='subtitle1'>Сгенерированный текст</Typography>
+              <Typography variant='body1'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+                minima facere corporis et magnam iure possimus necessitatibus
+                unde. Aliquam consequatur voluptates laudantium explicabo aut
+                vel a veritatis, alias aliquid suscipit.
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Container>

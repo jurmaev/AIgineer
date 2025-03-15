@@ -66,25 +66,23 @@ export function CongratulationsPage() {
             Идеальное поздравление за пару кликов
           </Typography>
 
-          <Typography
-            variant='body1'
-            color='#64748B'
-            marginBottom='24px'
-            maxWidth='680px'
-          >
+          <Typography variant='body1' marginBottom='24px' maxWidth='680px'>
             Просто укажите параметры, такие как тип события, стиль и тон текста,
             и получите готовое поздравление, которое порадует ваших близких,
             друзей или коллег
           </Typography>
 
-          <Box display='flex' alignItems='center' gap='24px'>
+          <Box display='flex' alignItems='stretch' gap='24px'>
             <Box
               width='100%'
+              borderRadius={2}
+              padding={3}
+              bgcolor='#fff'
               component='form'
               onSubmit={handleSubmit(onSubmit)}
             >
               <Stack gap={1}>
-                <Typography>Сгенерируйте поздравление</Typography>
+                <Typography variant='subtitle1'>Сгенерируйте поздравление</Typography>
 
                 <Controller
                   name='celebrationId'
@@ -126,7 +124,7 @@ export function CongratulationsPage() {
                 <Controller
                   name='styleId'
                   control={control}
-                  defaultValue={tones.length ? tones[0].id : ''}
+                  defaultValue={styles.length ? styles[0].id : ''}
                   render={({ field }) => (
                     <FormControl size='small'>
                       <Typography>Стиль</Typography>
@@ -169,7 +167,7 @@ export function CongratulationsPage() {
               </Stack>
             </Box>
 
-            <Box width='100%'>
+            <Box width='100%' bgcolor='#fff' padding={3} borderRadius={2}>
               <Typography variant='subtitle1'>Сгенерированный текст</Typography>
               <Typography variant='body1'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid

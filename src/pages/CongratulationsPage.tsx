@@ -9,13 +9,15 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useForm, Controller } from 'react-hook-form';
+import { useEffect } from 'react';
 import {
   useGetCelebrations,
+  useGetServices,
   useGetStyles,
   useGetTones,
   usePostPrompt,
 } from '../hooks';
-import { useForm, Controller } from 'react-hook-form';
 
 type CongratulationForm = {
   styleId: string;
@@ -29,9 +31,22 @@ export function CongratulationsPage() {
   const styles = useGetStyles();
   const celebrations = useGetCelebrations();
   const tones = useGetTones();
+  const services = useGetServices();
   const postPrompt = usePostPrompt();
 
-  const { handleSubmit, control } = useForm<CongratulationForm>();
+  const currentService = services[0] || '';
+
+  const { handleSubmit, control, setValue } = useForm<CongratulationForm>();
+
+  useEffect(() => {
+    if (!styles.length || !celebrations.length || !tones.length) {
+      return;
+    }
+
+    setValue('toneId', tones[0].id);
+    setValue('celebrationId', celebrations[0].id);
+    setValue('styleId', styles[0].id);
+  }, [celebrations, tones, styles, setValue]);
 
   const onSubmit = (data: CongratulationForm) => {
     console.log(data);
@@ -41,6 +56,7 @@ export function CongratulationsPage() {
       toneId: data.toneId,
       styleType: data.styleId,
       receiverName: data.name,
+      serviceId: currentService,
     };
 
     postPrompt(postPromptBody);
@@ -81,19 +97,19 @@ export function CongratulationsPage() {
               component='form'
               onSubmit={handleSubmit(onSubmit)}
             >
-              <Stack gap={1}>
-                <Typography variant='subtitle1'>Сгенерируйте поздравление</Typography>
-
+              <Stack gap={2}>
                 <Controller
                   name='celebrationId'
                   control={control}
-                  defaultValue={celebrations.length ? celebrations[0].id : ''}
+                  defaultValue=''
                   render={({ field }) => (
                     <FormControl size='small'>
-                      <Typography>Повод</Typography>
+                      <Typography variant='subtitle1' marginBottom='4px'>
+                        Повод
+                      </Typography>
 
                       <Select id='celebrationType' {...field}>
-                        {celebrations.map((celebration) => (
+                        {celebrations?.map((celebration) => (
                           <MenuItem value={celebration.id} key={celebration.id}>
                             {celebration.name}
                           </MenuItem>
@@ -106,12 +122,14 @@ export function CongratulationsPage() {
                 <Controller
                   name='toneId'
                   control={control}
-                  defaultValue={tones.length ? tones[0].id : ''}
+                  defaultValue=''
                   render={({ field }) => (
                     <FormControl size='small'>
-                      <Typography>Тон</Typography>
+                      <Typography variant='subtitle1' marginBottom='4px'>
+                        Тон
+                      </Typography>
                       <Select id='toneType' {...field}>
-                        {tones.map((tone) => (
+                        {tones?.map((tone) => (
                           <MenuItem value={tone.id} key={tone.id}>
                             {tone.name}
                           </MenuItem>
@@ -124,12 +142,14 @@ export function CongratulationsPage() {
                 <Controller
                   name='styleId'
                   control={control}
-                  defaultValue={styles.length ? styles[0].id : ''}
+                  defaultValue=''
                   render={({ field }) => (
                     <FormControl size='small'>
-                      <Typography>Стиль</Typography>
+                      <Typography variant='subtitle1' marginBottom='4px'>
+                        Стиль
+                      </Typography>
                       <Select id='styleType' {...field}>
-                        {styles.map((style) => (
+                        {styles?.map((style) => (
                           <MenuItem value={style.id} key={style.id}>
                             {style.name}
                           </MenuItem>
@@ -145,7 +165,9 @@ export function CongratulationsPage() {
                   defaultValue=''
                   render={({ field }) => (
                     <FormControl size='small'>
-                      <Typography>Имя</Typography>
+                      <Typography variant='subtitle1' marginBottom='4px'>
+                        Имя
+                      </Typography>
                       <TextField multiline size='small' {...field} />
                     </FormControl>
                   )}
@@ -157,24 +179,45 @@ export function CongratulationsPage() {
                   defaultValue=''
                   render={({ field }) => (
                     <FormControl size='small'>
-                      <Typography>Дополнительные пожелания</Typography>
+                      <Typography variant='subtitle1' marginBottom='4px'>
+                        Дополнительные пожелания
+                      </Typography>
                       <TextField multiline size='small' {...field} />
                     </FormControl>
                   )}
                 />
 
-                <Button type='submit'>Сгенерировать!</Button>
+                <Box display='flex' width='100%' justifyContent='center'>
+                  <Button variant='contained' type='submit'>
+                    Сотворить магию
+                  </Button>
+                </Box>
               </Stack>
             </Box>
 
             <Box width='100%' bgcolor='#fff' padding={3} borderRadius={2}>
-              <Typography variant='subtitle1'>Сгенерированный текст</Typography>
-              <Typography variant='body1'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-                minima facere corporis et magnam iure possimus necessitatibus
-                unde. Aliquam consequatur voluptates laudantium explicabo aut
-                vel a veritatis, alias aliquid suscipit.
-              </Typography>
+              <Stack gap={2}>
+                <Typography variant='subtitle1'>
+                  Сгенерированный текст
+                </Typography>
+
+                <Typography variant='body1' height='392px'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Aliquid minima facere corporis et magnam iure possimus
+                  necessitatibus unde. Aliquam consequatur voluptates laudantium
+                  explicabo aut vel a veritatis, alias aliquid suscipit.
+                </Typography>
+
+                <Box
+                  display='flex'
+                  justifyContent='center'
+                  alignItems='center'
+                  gap='24px'
+                >
+                  <Button variant='outlined'>Скопировать текст</Button>
+                  <Button variant='contained'>Сгенерировать снова</Button>
+                </Box>
+              </Stack>
             </Box>
           </Box>
         </Box>

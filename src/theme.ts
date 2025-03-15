@@ -23,5 +23,28 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          variants: [
+            {
+              props: { variant: 'contained' },
+              style: { borderRadius: '8px', backgroundColor: '#1677FF' },
+            },
+            {
+              props: { variant: 'outlined' },
+              style: {
+                borderRadius: '8px',
+                borderColor: '#D9D9D9',
+                color: '#475569',
+              },
+            },
+          ],
+        },
+      },
+    },
   },
 });

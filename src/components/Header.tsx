@@ -1,4 +1,5 @@
-import { AppBar, Box, Container, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { AppBar, Box, Container, Link, Typography } from '@mui/material';
 
 export const Header = () => {
   return (
@@ -11,9 +12,17 @@ export const Header = () => {
           justifyContent='space-between'
           padding='16px 0'
         >
-          <Typography fontSize='36px' fontWeight='700' lineHeight='1'>
+          <Link
+            component={RouterLink}
+            to='/'
+            fontSize='36px'
+            fontWeight='700'
+            color='#000'
+            underline='none'
+            lineHeight='1'
+          >
             AIgineer
-          </Typography>
+          </Link>
           <Typography variant='body1' textAlign='right' maxWidth='295px'>
             генератор поздравлений от ИИ на день рождения и не только
           </Typography>

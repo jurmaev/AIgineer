@@ -16,6 +16,9 @@ export interface State {
 
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
+
+  services: Option[];
+  setServices: (newServices: Option[]) => void;
 }
 
 export const useStore = create<State>()((set) => ({
@@ -35,4 +38,8 @@ export const useStore = create<State>()((set) => ({
 
   isLoading: false,
   setIsLoading: (value) => set((state) => ({ ...state, isLoading: value })),
+
+  services: [],
+  setServices: (newServices) =>
+    set((state) => ({ ...state, services: newServices })),
 }));

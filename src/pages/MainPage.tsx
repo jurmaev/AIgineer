@@ -12,7 +12,7 @@ export function MainPage() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/congratulations');
+    navigate('/birthdai');
   };
 
   return (

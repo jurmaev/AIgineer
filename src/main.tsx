@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
         <Header />
         <Routes>
           <Route path='/' element={<MainPage />} />
-          <Route path='/congratulations' element={<CongratulationsPage />} />
+          <Route path='/birthdai' element={<CongratulationsPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

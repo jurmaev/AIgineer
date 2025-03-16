@@ -5,6 +5,7 @@ import {
   FormControl,
   MenuItem,
   Select,
+  Skeleton,
   Stack,
   TextField,
   Typography,
@@ -18,6 +19,7 @@ import {
   useGetTones,
   usePostPrompt,
 } from '../hooks';
+import { useStore } from '../store';
 
 type CongratulationForm = {
   styleId: string;
@@ -34,9 +36,13 @@ export function CongratulationsPage() {
   const services = useGetServices();
   const postPrompt = usePostPrompt();
 
-  const currentService = services[0] || '';
+  const content = useStore((store) => store.content);
+  const isLoading = useStore((store) => store.isLoading);
 
-  const { handleSubmit, control, setValue } = useForm<CongratulationForm>();
+  const currentService = services[0].id || '';
+
+  const { handleSubmit, control, setValue, getValues } =
+    useForm<CongratulationForm>();
 
   useEffect(() => {
     if (!styles.length || !celebrations.length || !tones.length) {
@@ -49,17 +55,20 @@ export function CongratulationsPage() {
   }, [celebrations, tones, styles, setValue]);
 
   const onSubmit = (data: CongratulationForm) => {
-    console.log(data);
     const postPromptBody = {
-      mainContent: data.content,
+      additionalWishes: data.content,
       celebrationId: data.celebrationId,
       toneId: data.toneId,
-      styleType: data.styleId,
+      styleId: data.styleId,
       receiverName: data.name,
       serviceId: currentService,
     };
 
     postPrompt(postPromptBody);
+  };
+
+  const onGenerateAgainClick = () => {
+    onSubmit(getValues());
   };
 
   return (
@@ -202,10 +211,16 @@ export function CongratulationsPage() {
                 </Typography>
 
                 <Typography variant='body1' height='392px'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid minima facere corporis et magnam iure possimus
-                  necessitatibus unde. Aliquam consequatur voluptates laudantium
-                  explicabo aut vel a veritatis, alias aliquid suscipit.
+                  {isLoading ? (
+                    <>
+                      <Skeleton variant='text' animation='wave' width='90%' />
+                      <Skeleton variant='text' animation='wave' width='100%' />
+                      <Skeleton variant='text' animation='wave' width='80%' />
+                      <Skeleton variant='text' animation='wave' width='95%' />
+                    </>
+                  ) : (
+                    content
+                  )}
                 </Typography>
 
                 <Box
@@ -215,7 +230,9 @@ export function CongratulationsPage() {
                   gap='24px'
                 >
                   <Button variant='outlined'>Скопировать текст</Button>
-                  <Button variant='contained'>Сгенерировать снова</Button>
+                  <Button variant='contained' onClick={onGenerateAgainClick}>
+                    Сгенерировать снова
+                  </Button>
                 </Box>
               </Stack>
             </Box>

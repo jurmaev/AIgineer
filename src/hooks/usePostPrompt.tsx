@@ -2,10 +2,10 @@ import { api } from '../axios';
 import { useStore } from '../store';
 
 type SendPromptBody = {
-  mainContent: string;
+  additionalWishes: string;
   celebrationId: string;
   toneId: string;
-  styleType: string;
+  styleId: string;
   receiverName: string;
 };
 

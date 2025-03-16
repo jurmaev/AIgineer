@@ -1,5 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { FreeIcon, LightBulbIcon, LikeIcon } from '../icons';
 
 export function MainPage() {
   const navigate = useNavigate();
@@ -29,15 +30,18 @@ export function MainPage() {
             Почему выбирают наш генератор?
           </Typography>
           <Stack gap={1}>
-            <Stack>
+            <Stack direction='row' gap='12px' alignItems='center'>
+              <LikeIcon />
               <Typography variant='subtitle1'>Быстро и удобно</Typography>
             </Stack>
-            <Stack>
+            <Stack direction='row' gap='12px' alignItems='center'>
+              <LightBulbIcon />
               <Typography variant='subtitle1'>
                 Уникальные поздравления
               </Typography>
             </Stack>
-            <Stack>
+            <Stack direction='row' gap='12px' alignItems='center'>
+              <FreeIcon />
               <Typography variant='subtitle1'>
                 Бесплатно и без регистрации
               </Typography>

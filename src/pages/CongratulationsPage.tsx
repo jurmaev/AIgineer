@@ -20,6 +20,7 @@ import {
   usePostPrompt,
 } from '../hooks';
 import { useStore } from '../store';
+import { CopyIcon } from '../icons';
 
 type CongratulationForm = {
   styleId: string;
@@ -216,7 +217,9 @@ export function CongratulationsPage() {
                   alignItems='center'
                   gap='24px'
                 >
-                  <Button variant='outlined'>Скопировать текст</Button>
+                  <Button variant='outlined' startIcon={<CopyIcon />}>
+                    Скопировать текст
+                  </Button>
                   <Button variant='contained' onClick={onGenerateAgainClick}>
                     Сгенерировать снова
                   </Button>

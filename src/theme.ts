@@ -1,6 +1,33 @@
 import { createTheme } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    gradient: React.CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    gradient?: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    gradient: true;
+  }
+}
+
 export const theme = createTheme({
+  typography: {
+    gradient: {
+      fontSize: '36px',
+      fontWeight: 700,
+      lineHeight: 1,
+      background: 'linear-gradient(45deg, #457FDD, #49505B)',
+      WebkitBackgroundClip: 'text',
+      backgroundClip: 'text',
+      color: 'transparent',
+    },
+  },
   components: {
     MuiAppBar: {
       defaultProps: {
@@ -11,6 +38,11 @@ export const theme = createTheme({
       },
     },
     MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          gradient: 'p',
+        },
+      },
       styleOverrides: {
         root: {
           variants: [

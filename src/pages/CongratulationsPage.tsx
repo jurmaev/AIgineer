@@ -38,8 +38,7 @@ export function CongratulationsPage() {
 
   const content = useStore((store) => store.content);
   const isLoading = useStore((store) => store.isLoading);
-
-  const currentService = services[0].id || '';
+  const currentService = services[0]?.id || '';
 
   const { handleSubmit, control, setValue, getValues } =
     useForm<CongratulationForm>();
@@ -75,19 +74,7 @@ export function CongratulationsPage() {
     <>
       <Container>
         <Box paddingY={3}>
-          <Typography
-            variant='h2'
-            fontSize='36px'
-            fontWeight='700'
-            marginBottom='24px'
-            lineHeight='1'
-            sx={{
-              background: 'linear-gradient(45deg, #457FDD, #49505B)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-            }}
-          >
+          <Typography variant='gradient' marginBottom='24px'>
             Идеальное поздравление за пару кликов
           </Typography>
 

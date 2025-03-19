@@ -71,6 +71,10 @@ export function CongratulationsPage() {
     onSubmit(getValues());
   };
 
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(content);
+  };
+
   return (
     <>
       <Container>
@@ -217,7 +221,11 @@ export function CongratulationsPage() {
                   alignItems='center'
                   gap='24px'
                 >
-                  <Button variant='outlined' startIcon={<CopyIcon />}>
+                  <Button
+                    variant='outlined'
+                    onClick={handleCopyClick}
+                    startIcon={<CopyIcon />}
+                  >
                     Скопировать текст
                   </Button>
                   <Button variant='contained' onClick={onGenerateAgainClick}>

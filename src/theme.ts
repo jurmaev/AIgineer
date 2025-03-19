@@ -26,6 +26,7 @@ export const theme = createTheme({
       WebkitBackgroundClip: 'text',
       backgroundClip: 'text',
       color: 'transparent',
+      fontFamily: 'Roboto, Arial, sans-serif',
     },
   },
   components: {
@@ -77,6 +78,9 @@ export const theme = createTheme({
           ],
         },
       },
+    },
+    MuiLink: {
+      styleOverrides: { root: { fontFamily: 'Roboto, Arial, sans-serif' } },
     },
   },
 });

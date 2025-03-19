@@ -4,7 +4,7 @@ import { AppBar, Box, Container, Link, Typography } from '@mui/material';
 export const Header = () => {
   return (
     <AppBar>
-      <Container>
+      <Container maxWidth='xl'>
         <Box
           display='flex'
           flexDirection='row'

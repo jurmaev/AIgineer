@@ -77,7 +77,7 @@ export function CongratulationsPage() {
 
   return (
     <>
-      <Container>
+      <Container maxWidth='xl'>
         <Box paddingY={3}>
           <Typography variant='gradient' marginBottom='24px'>
             Идеальное поздравление за пару кликов

@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   useGetCelebrations,
   useGetServices,
@@ -77,6 +78,13 @@ export function CongratulationsPage() {
 
   return (
     <>
+      <Helmet>
+        <title>AIgineer | Генератор поздравлений</title>
+        <meta
+          name='description'
+          content='Создавайте идеальные поздравления за секунды! Наш сайт с AI поможет вам подобрать теплые, оригинальные и персонализированные пожелания на день рождения, праздники или важные события. Вдохновляйтесь и радуйте близких!'
+        />
+      </Helmet>
       <Container maxWidth='xl'>
         <Box paddingY={3}>
           <Typography variant='gradient' marginBottom='24px'>

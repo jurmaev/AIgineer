@@ -1,6 +1,7 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FreeIcon, LightBulbIcon, LikeIcon } from '../icons';
+import { Helmet } from 'react-helmet';
 
 export function MainPage() {
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ export function MainPage() {
 
   return (
     <>
+      <Helmet>
+        <title>AIgineer</title>
+        <meta
+          name='description'
+          content='Ваш универсальный помощник с AI-инструментами для жизни! Упрощайте задачи, вдохновляйтесь и достигайте большего с помощью искусственного интеллекта.'
+        />
+      </Helmet>
       <Container>
         <Box margin='0 auto' paddingY={3} maxWidth='768px'>
           <Stack gap={3} alignItems='center' marginBottom='40px'>

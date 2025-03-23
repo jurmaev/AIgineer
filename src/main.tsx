@@ -12,6 +12,7 @@ import { CongratulationsPage } from './pages/CongratulationsPage.tsx';
 import { Header } from './components/Header.tsx';
 import { theme } from './theme.ts';
 import './index.css';
+import { NotFoundPage } from './pages/NotFoundPage.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/birthdai' element={<CongratulationsPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

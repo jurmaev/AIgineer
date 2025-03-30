@@ -9,6 +9,7 @@ import {
   Stack,
   TextField,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
@@ -32,6 +33,7 @@ type CongratulationForm = {
 };
 
 export function CongratulationsPage() {
+  const matches = useMediaQuery('(min-width:768px)');
   const styles = useGetStyles();
   const celebrations = useGetCelebrations();
   const tones = useGetTones();
@@ -41,6 +43,8 @@ export function CongratulationsPage() {
   const content = useStore((store) => store.content);
   const isLoading = useStore((store) => store.isLoading);
   const currentService = services[0]?.id || '';
+
+  console.log(matches);
 
   const { handleSubmit, control, setValue, getValues } =
     useForm<CongratulationForm>();
@@ -97,9 +101,14 @@ export function CongratulationsPage() {
             друзей или коллег
           </Typography>
 
-          <Box display='flex' alignItems='stretch' gap='24px'>
+          <Box
+            display='flex'
+            alignItems='stretch'
+            flexDirection={matches ? 'row' : 'column'}
+            gap='24px'
+          >
             <Box
-              width='100%'
+              flex={1}
               borderRadius={2}
               padding={3}
               bgcolor='#fff'
@@ -204,7 +213,7 @@ export function CongratulationsPage() {
               </Stack>
             </Box>
 
-            <Box width='100%' bgcolor='#fff' padding={3} borderRadius={2}>
+            <Box flex={1} bgcolor='#fff' padding={3} borderRadius={2}>
               <Stack gap={2}>
                 <Typography variant='subtitle1'>
                   Сгенерированный текст

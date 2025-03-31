@@ -11,9 +11,10 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useForm, Controller } from 'react-hook-form';
+
 import {
   useGetCelebrations,
   useGetServices,
@@ -21,8 +22,8 @@ import {
   useGetTones,
   usePostPrompt,
 } from '../hooks';
-import { useStore } from '../store';
 import { CopyIcon } from '../icons';
+import { useStore } from '../store';
 
 type CongratulationForm = {
   styleId: string;

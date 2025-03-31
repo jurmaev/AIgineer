@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import { Option } from './types';
 
 export interface State {

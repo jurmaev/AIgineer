@@ -1,7 +1,8 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { FreeIcon, LightBulbIcon, LikeIcon } from '../icons';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
+
+import { FreeIcon, LightBulbIcon, LikeIcon } from '../icons';
 
 export function MainPage() {
   const navigate = useNavigate();

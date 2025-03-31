@@ -1,5 +1,5 @@
-import { Link as RouterLink } from 'react-router-dom';
 import { Box, Container, Link, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const NotFoundPage = () => (
   <Container>

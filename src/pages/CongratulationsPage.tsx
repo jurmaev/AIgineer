@@ -44,8 +44,6 @@ export function CongratulationsPage() {
   const isLoading = useStore((store) => store.isLoading);
   const currentService = services[0]?.id || '';
 
-  console.log(matches);
-
   const { handleSubmit, control, setValue, getValues } =
     useForm<CongratulationForm>();
 

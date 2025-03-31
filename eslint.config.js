@@ -4,7 +4,6 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import eslintPluginImport from 'eslint-plugin-import';
-// import importRecommendedConfig from 'eslint-plugin-import/config/flat/recommended';
 
 export default tseslint.config(
   { ignores: ['dist'] },

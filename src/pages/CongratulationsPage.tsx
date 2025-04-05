@@ -77,10 +77,19 @@ export function CongratulationsPage() {
   };
 
   const handleCopyClick = () => {
-    if (window.isSecureContext) {
+    if (navigator.clipboard) {
       navigator.clipboard.writeText(content);
     } else {
-      document.execCommand('copy', false, content);
+      console.log('exec command');
+      const textarea = document.createElement('textarea');
+
+      textarea.value = content;
+      textarea.style.position = 'fixed';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
     }
   };
 
@@ -223,7 +232,7 @@ export function CongratulationsPage() {
                   Сгенерированный текст
                 </Typography>
 
-                <Typography variant='body1' height='392px'>
+                <Box height='392px'>
                   {isLoading ? (
                     <>
                       <Skeleton variant='text' animation='wave' width='90%' />
@@ -232,9 +241,16 @@ export function CongratulationsPage() {
                       <Skeleton variant='text' animation='wave' width='95%' />
                     </>
                   ) : (
-                    <Markdown>{content}</Markdown>
+                    <Box
+                      color='#64748B'
+                      fontFamily='"Roboto", "Helvetica", "Arial", sans-serif'
+                      lineHeight='1.5'
+                      sx={{ '> p': { margin: 0 } }}
+                    >
+                      <Markdown>{content}</Markdown>
+                    </Box>
                   )}
-                </Typography>
+                </Box>
 
                 <Box
                   display='flex'

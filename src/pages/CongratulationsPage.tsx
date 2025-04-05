@@ -14,6 +14,7 @@ import {
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm, Controller } from 'react-hook-form';
+import Markdown from 'react-markdown';
 
 import {
   useGetCelebrations,
@@ -231,7 +232,7 @@ export function CongratulationsPage() {
                       <Skeleton variant='text' animation='wave' width='95%' />
                     </>
                   ) : (
-                    content
+                    <Markdown>{content}</Markdown>
                   )}
                 </Typography>
 

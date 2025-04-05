@@ -76,7 +76,11 @@ export function CongratulationsPage() {
   };
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(content);
+    if (window.isSecureContext) {
+      navigator.clipboard.writeText(content);
+    } else {
+      document.execCommand('copy', false, content);
+    }
   };
 
   return (

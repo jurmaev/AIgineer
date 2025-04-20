@@ -4,4 +4,4 @@ services:
     build:
       dockerfile: ./Dockerfile
     ports:
-      - 8000:80
+      - 8000:3000
